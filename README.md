@@ -51,3 +51,37 @@ A fase final, onde o compilador "fala" a língua do hardware.
 3. **Semântico:** Vê se a frase faz sentido lógico.
 4. **IR (LLVM):** Traduz para uma língua "universal" (para otimizar).
 5. **Backend:** Cospe o Assembly do **RISC-V**.
+
+
+### Como compilar esse "monstro"?
+
+Como você está no Linux, você vai precisar dos headers do LLVM. No Arch ou Ubuntu, você instala o pacote `llvm-dev`.
+
+O comando de compilação é chatinho porque o LLVM tem muitas dependências, então você usa o `llvm-config`:
+
+```bash
+# 1. Gera o parser
+bison -d parser.y -o parser.cpp
+
+# 2. Gera o scanner
+flex -o scanner.cpp scanner.l
+
+# 3. Compila tudo junto
+g++ main.cpp scanner.cpp parser.cpp codegen.cpp `llvm-config --cxxflags --ldflags --libs` -lpthread -lncurses -ldl -o meu_compilador
+
+```
+
+### O que isso faz?
+
+Se você passar um arquivo `teste.c` com:
+
+```c
+int main() {
+    return 42;
+}
+
+```
+
+O seu compilador vai cuspir o **LLVM IR**. Para transformar isso em **x86**, basta rodar o comando do próprio LLVM:
+`./meu_compilador teste.c | llc -march=x86-64 -o saida.s`
+
