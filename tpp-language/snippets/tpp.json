@@ -1,0 +1,95 @@
+{
+  "Declaração de Variável Inteiro": {
+    "prefix": "inteiro",
+    "body": ["inteiro: ${1:variavel}"],
+    "description": "Declara uma variável inteira"
+  },
+  "Declaração de Variável Flutuante": {
+    "prefix": "flutuante",
+    "body": ["flutuante: ${1:variavel}"],
+    "description": "Declara uma variável flutuante"
+  },
+  "Vetor Inteiro": {
+    "prefix": "vetor-int",
+    "body": ["inteiro: ${1:nome}[${2:tamanho}]"],
+    "description": "Declara um vetor inteiro"
+  },
+  "Se-Então": {
+    "prefix": "se",
+    "body": [
+      "se ${1:condicao} então",
+      "\t${2:// ação}",
+      "fim"
+    ],
+    "description": "Estrutura condicional se-então"
+  },
+  "Se-Então-Senão": {
+    "prefix": "se-senao",
+    "body": [
+      "se ${1:condicao} então",
+      "\t${2:// ação verdadeira}",
+      "senão",
+      "\t${3:// ação falsa}",
+      "fim"
+    ],
+    "description": "Estrutura condicional se-então-senão"
+  },
+  "Repita-Até": {
+    "prefix": "repita",
+    "body": [
+      "repita",
+      "\t${1:// ação}",
+      "até ${2:condicao}"
+    ],
+    "description": "Estrutura de repetição repita-até"
+  },
+  "Função sem retorno": {
+    "prefix": "funcao",
+    "body": [
+      "${1:nome} (${2:parametros})",
+      "\t${3:// corpo}",
+      "fim"
+    ],
+    "description": "Declara uma função sem tipo de retorno"
+  },
+  "Função com retorno inteiro": {
+    "prefix": "funcao-int",
+    "body": [
+      "inteiro ${1:nome} (${2:parametros})",
+      "\t${3:// corpo}",
+      "\tretorna(${4:valor})",
+      "fim"
+    ],
+    "description": "Declara uma função com retorno inteiro"
+  },
+  "Função com retorno flutuante": {
+    "prefix": "funcao-float",
+    "body": [
+      "flutuante ${1:nome} (${2:parametros})",
+      "\t${3:// corpo}",
+      "\tretorna(${4:valor})",
+      "fim"
+    ],
+    "description": "Declara uma função com retorno flutuante"
+  },
+  "Leia": {
+    "prefix": "leia",
+    "body": ["leia(${1:variavel})"],
+    "description": "Lê uma variável"
+  },
+  "Escreva": {
+    "prefix": "escreva",
+    "body": ["escreva(${1:expressao})"],
+    "description": "Escreve uma expressão"
+  },
+  "Retorna": {
+    "prefix": "retorna",
+    "body": ["retorna(${1:expressao})"],
+    "description": "Retorna uma expressão"
+  },
+  "Atribuição": {
+    "prefix": ":=",
+    "body": ["${1:variavel} := ${2:expressao}"],
+    "description": "Atribuição de valor"
+  }
+}

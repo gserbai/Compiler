@@ -1,0 +1,42 @@
+{
+  "name": "tpp-language",
+  "displayName": "TPP Language Support",
+  "description": "Syntax highlighting for the TPP language (Compiladores - UTFPR)",
+  "version": "1.0.0",
+  "publisher": "compiladores",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seu-usuario/tpp-language"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "tpp",
+        "aliases": ["TPP", "tpp"],
+        "extensions": [".tpp"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "tpp",
+        "scopeName": "source.tpp",
+        "path": "./syntaxes/tpp.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "tpp",
+        "path": "./snippets/tpp.json"
+      }
+    ],
+    "themes": []
+  }
+}
