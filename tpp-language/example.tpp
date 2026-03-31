@@ -1,5 +1,5 @@
-// Exemplo de programa em TPP — Fatorial e Fibonacci
-// Demonstra todas as construções da linguagem
+// Example to program in TPP — Factorial and Fibonacci
+// Demonstrated all the builds from language
 
 inteiro fatorial (inteiro: n)
     inteiro: resultado
