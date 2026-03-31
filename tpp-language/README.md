@@ -1,134 +1,92 @@
-# TPP Language Support for VS Code
+TPP Language Support for VS Code
+=================================
 
-Extensão de **Syntax Highlighting** para a linguagem **TPP**.
+Syntax highlighting para TPP. Sem frescura.
 
-## Funcionalidades
+FUNCIONALIDADES
+---------------
 
-- Destaque de palavras-chave (`se`, `então`, `senão`, `fim`, `repita`, `até`)
-- Destaque de tipos (`inteiro`, `flutuante`)
-- Destaque de I/O (`leia`, `escreva`, `retorna`)
-- Destaque de operadores (`+`, `-`, `*`, `/`, `:=`, `<>`, `<=`, `>=`, `&&`, `||`, `!`)
-- Destaque de números (inteiros, flutuantes, notação científica)
-- Destaque de chamadas de função
-- Suporte a comentários (`//` e `/* */`)
-- Snippets para estruturas comuns
-- Auto-fechamento de parênteses e colchetes
+  - Palavras-chave: se, então, senão, fim, repita, até
+  - Tipos: inteiro, flutuante
+  - I/O: leia, escreva, retorna
+  - Operadores: + - * / := <> <= >= && || !
+  - Números: inteiros, flutuantes, notação científica
+  - Chamadas de função
+  - Comentários: // e /* */
+  - Snippets para estruturas comuns
+  - Auto-fechamento de parênteses e colchetes
 
-## Instalação (Modo Desenvolvimento)
 
-### Pré-requisitos
-- [VS Code](https://code.visualstudio.com/) instalado
-- !!! [Node.js](https://nodejs.org/) instalado (v14+) se quiser via VSIX !!!
+INSTALAÇÃO
+----------
 
-### Passo a passo
+Não precisa de Node. Não precisa compilar nada. Só copiar.
 
-1. **Clone ou extraia** este pacote em uma pasta:
-   ```
-   tpp-language/
-   ├── package.json
-   ├── language-configuration.json
-   ├── syntaxes/
-   │   └── tpp.tmLanguage.json
-   ├── snippets/
-   │   └── tpp.json
-   └── README.md
-   ```
+  Linux/macOS:
 
-2. **Copie a pasta** para o diretório de extensões do VS Code:
+    cp -r tpp-language ~/.vscode/extensions/
 
-   - **Linux/macOS:**
-     ```bash
-     cp -r tpp-language ~/.vscode/extensions/
-     ```
-   - **Windows:**
-     ```
-     Copie a pasta para: %USERPROFILE%\.vscode\extensions\
-     ```
+  Windows:
 
-3. **Reinicie o VS Code**
+    Copie a pasta para %USERPROFILE%\.vscode\extensions\
 
-4. **Pronto!** Abra qualquer arquivo `.tpp` e o highlight será aplicado automaticamente.
+Reinicie o VS Code. Abra um .tpp. Funciona.
 
----
 
-### Instalação via VSIX (Empacotado)
+INSTALAÇÃO VIA VSIX (opcional)
+-------------------------------
 
-Se quiser gerar um arquivo `.vsix` instalável:
+Se por algum motivo você precisar do .vsix:
 
-1. Instale o `vsce`:
-   ```bash
-   npm install -g @vscode/vsce
-   ```
+  1. Instale o vsce:
 
-2. Dentro da pasta do projeto, execute:
-   ```bash
-   vsce package
-   ```
-   Isso gera um arquivo `tpp-language-1.0.0.vsix`.
+       npm install -g @vscode/vsce
 
-3. No VS Code, pressione `Ctrl+Shift+P` e execute:
-   ```
-   Extensions: Install from VSIX...
-   ```
-   Selecione o arquivo `.vsix` gerado.
+  2. Empacote:
 
----
+       vsce package
 
-## Snippets disponíveis
+  3. No VS Code: Ctrl+Shift+P -> "Extensions: Install from VSIX..."
 
-| Prefixo       | Descrição                        |
-|---------------|----------------------------------|
-| `se`          | Estrutura se-então               |
-| `se-senao`    | Estrutura se-então-senão         |
-| `repita`      | Estrutura repita-até             |
-| `inteiro`     | Declaração de variável inteira   |
-| `flutuante`   | Declaração de variável flutuante |
-| `vetor-int`   | Declaração de vetor inteiro      |
-| `funcao`      | Função sem retorno               |
-| `funcao-int`  | Função com retorno inteiro       |
-| `funcao-float`| Função com retorno flutuante     |
-| `leia`        | Comando leia                     |
-| `escreva`     | Comando escreva                  |
-| `retorna`     | Comando retorna                  |
+Isso requer Node.js v14+. Se não sabe o que é isso, use o método acima.
 
-## Exemplo de código TPP destacado
 
-```tpp
-// Programa fatorial em TPP
-inteiro fatorial (inteiro: n)
-    inteiro: resultado
-    resultado := 1
-    repita
-        resultado := resultado * n
-        n := n - 1
-    até n = 0
-    retorna(resultado)
-fim
+SNIPPETS
+--------
 
-inteiro principal ()
-    inteiro: num
-    leia(num)
-    escreva(fatorial(num))
-fim
-```
+  se          ->  se-então
+  se-senao    ->  se-então-senão
+  repita      ->  repita-até
+  inteiro     ->  declaração de variável inteira
+  flutuante   ->  declaração de variável flutuante
+  vetor-int   ->  vetor inteiro
+  funcao      ->  função sem retorno
+  funcao-int  ->  função com retorno inteiro
+  funcao-float -> função com retorno flutuante
+  leia        ->  leia(var)
+  escreva     ->  escreva(expr)
+  retorna     ->  retorna(expr)
 
-## Estrutura do projeto
 
-```
-tpp-language/
-├── package.json               # Manifesto da extensão
-├── language-configuration.json # Config de brackets, indentação
-├── syntaxes/
-│   └── tpp.tmLanguage.json    # Gramática TextMate (regras do highlight)
-├── snippets/
-│   └── tpp.json               # Snippets de código
-└── README.md                  # Este arquivo
-```
+ESTRUTURA
+---------
 
-## Como funciona
+  tpp-language/
+  ├── package.json                  manifesto da extensão
+  ├── language-configuration.json   brackets, indentação
+  ├── syntaxes/tpp.tmLanguage.json  gramática TextMate (regras do highlight)
+  ├── snippets/tpp.json             snippets
+  └── README                        este arquivo
 
-O highlight é implementado via **TextMate Grammar** (`.tmLanguage.json`), o mesmo padrão usado por todas as extensões de linguagem do VS Code. As regras usam **expressões regulares** para identificar tokens e atribuir **scopes** semânticos (ex: `keyword.control.tpp`, `storage.type.tpp`), que o tema de cores do VS Code então colore.
+
+COMO FUNCIONA
+-------------
+
+TextMate Grammar (.tmLanguage.json). Regex identificam tokens e atribuem
+scopes semânticos (keyword.control.tpp, storage.type.tpp, etc). O tema de
+cores do VS Code faz o resto.
+
 
 ---
-
-Desenvolvido para a disciplina de **Compiladores** — UTFPR by Guilherme Saides Serbai - 2551802
+Compiladores - UTFPR
+Guilherme Saides Serbai - 2551802
