@@ -70,17 +70,6 @@ If you want to generate an installable `.vsix` file:
 | `leia`        | leia command                     |
 | `escreva`     | escreva command                  |
 | `retorna`     | retorna command                  |
-## Project Structure
-```
-tpp-language/
-├── package.json                # Extension manifest
-├── language-configuration.json # Brackets, indentation config
-├── syntaxes/
-│   └── tpp.tmLanguage.json     # TextMate Grammar (highlight rules)
-├── snippets/
-│   └── tpp.json                # Code snippets
-└── README.md                   # This file
-```
 ## How it works
 Highlighting is implemented via **TextMate Grammar** (`.tmLanguage.json`), the same standard used by all VS Code language extensions. The rules use **regular expressions** to identify tokens and assign semantic **scopes** (e.g. `keyword.control.tpp`, `storage.type.tpp`), which the VS Code color theme then colorizes.
 
