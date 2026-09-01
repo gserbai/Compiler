@@ -1,0 +1,7 @@
+digraph "CFG for 'maiorde4' function" {
+	label="CFG for 'maiorde4' function";
+
+	Node0x5a4433002a20 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %retval = alloca i32, align 4\l  %a.1 = alloca i32, align 4\l  store i32 %a, ptr %a.1, align 4\l  %b.1 = alloca i32, align 4\l  store i32 %b, ptr %b.1, align 4\l  %c.1 = alloca i32, align 4\l  store i32 %c, ptr %c.1, align 4\l  %d.1 = alloca i32, align 4\l  store i32 %d, ptr %d.1, align 4\l  %.10 = load i32, ptr %a.1, align 4\l  %.11 = load i32, ptr %b.1, align 4\l  %.12 = call i32 @maiorde2(i32 %.10, i32 %.11)\l  %.13 = load i32, ptr %c.1, align 4\l  %.14 = load i32, ptr %d.1, align 4\l  %.15 = call i32 @maiorde2(i32 %.13, i32 %.14)\l  %.16 = call i32 @maiorde2(i32 %.12, i32 %.15)\l  store i32 %.16, ptr %retval, align 4\l  br label %exit\l}"];
+	Node0x5a4433002a20 -> Node0x5a44330038a0[tooltip="entry -> exit\nProbability 100.00%" ];
+	Node0x5a44330038a0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{exit:\l|  %ret.final = load i32, ptr %retval, align 4\l  ret i32 %ret.final\l}"];
+}

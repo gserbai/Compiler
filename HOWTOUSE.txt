@@ -1,0 +1,32 @@
+./build/executaveis/gencode-test-023; echo $? 
+__________
+python -m pytest -q tppgencode_test.py
+
+__________
+cd ~/geracao-de-codigo-gserbai
+source venv/bin/activate
+
+for n in 001 025 026 027 028 029 030; do
+    echo
+    echo "=============================="
+    echo "TESTE $n"
+    echo "=============================="
+    echo "Arquivo: tests/gencode-test-$n.tpp"
+    echo
+
+    echo "[Semântico]"
+    python tppsema.py -k tests/gencode-test-$n.tpp
+
+    echo
+    echo "[Geração de código]"
+    rm -f tests/gencode-test-$n.tpp.ll
+    python tppgencode.py tests/gencode-test-$n.tpp
+
+    if [ -f tests/gencode-test-$n.tpp.ll ]; then
+        echo "GEROU .ll"
+    else
+        echo "NÃO GEROU .ll"
+    fi
+done
+
+

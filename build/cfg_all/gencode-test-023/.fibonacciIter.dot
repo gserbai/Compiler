@@ -1,0 +1,12 @@
+digraph "CFG for 'fibonacciIter' function" {
+	label="CFG for 'fibonacciIter' function";
+
+	Node0x5fde8065f960 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %retval = alloca i32, align 4\l  %n.1 = alloca i32, align 4\l  store i32 %n, ptr %n.1, align 4\l  %i = alloca i32, align 4\l  %f = alloca i32, align 4\l  %k = alloca i32, align 4\l  store i32 1, ptr %i, align 4\l  store i32 0, ptr %f, align 4\l  store i32 1, ptr %k, align 4\l  br label %repeat.body\l}"];
+	Node0x5fde8065f960 -> Node0x5fde8065ff50[tooltip="entry -> repeat.body\nProbability 100.00%" ];
+	Node0x5fde8065ff50 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{repeat.body:\l|  %.8 = load i32, ptr %i, align 4\l  %.9 = load i32, ptr %f, align 4\l  %.10 = add i32 %.8, %.9\l  store i32 %.10, ptr %f, align 4\l  %.12 = load i32, ptr %f, align 4\l  %.13 = load i32, ptr %i, align 4\l  %.14 = sub i32 %.12, %.13\l  store i32 %.14, ptr %i, align 4\l  %.16 = load i32, ptr %k, align 4\l  %.17 = add i32 %.16, 1\l  store i32 %.17, ptr %k, align 4\l  %.19 = load i32, ptr %k, align 4\l  %.20 = load i32, ptr %n.1, align 4\l  %.21 = icmp sgt i32 %.19, %.20\l  br i1 %.21, label %repeat.end, label %repeat.body\l|{<s0>T|<s1>F}}"];
+	Node0x5fde8065ff50:s0 -> Node0x5fde80660ae0[tooltip="repeat.body -> repeat.end\nProbability 3.12%" ];
+	Node0x5fde8065ff50:s1 -> Node0x5fde8065ff50[tooltip="repeat.body -> repeat.body\nProbability 96.88%" ];
+	Node0x5fde80660ae0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{repeat.end:\l|  %.23 = load i32, ptr %f, align 4\l  store i32 %.23, ptr %retval, align 4\l  br label %exit\l}"];
+	Node0x5fde80660ae0 -> Node0x5fde80660d50[tooltip="repeat.end -> exit\nProbability 100.00%" ];
+	Node0x5fde80660d50 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{exit:\l|  %ret.final = load i32, ptr %retval, align 4\l  ret i32 %ret.final\l}"];
+}

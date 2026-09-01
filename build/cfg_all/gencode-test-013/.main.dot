@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5a8fc0b55e10 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %retval = alloca i32, align 4\l  %a = alloca i32, align 4\l  %b = alloca i32, align 4\l  %c = alloca i32, align 4\l  %i = alloca i32, align 4\l  store i32 0, ptr %i, align 4\l  br label %repeat.body\l}"];
+	Node0x5a8fc0b55e10 -> Node0x5a8fc0b56760[tooltip="entry -> repeat.body\nProbability 100.00%" ];
+	Node0x5a8fc0b56760 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{repeat.body:\l|  %.4 = getelementptr inbounds [3 x i8], ptr @fmt_scan_int_0, i32 0, i32 0\l  %.5 = call i32 (ptr, ...) @scanf(ptr %.4, ptr %a)\l  %.6 = getelementptr inbounds [3 x i8], ptr @fmt_scan_int_1, i32 0, i32 0\l  %.7 = call i32 (ptr, ...) @scanf(ptr %.6, ptr %b)\l  %.8 = load i32, ptr %a, align 4\l  %.9 = load i32, ptr %b, align 4\l  %.10 = call i32 @soma(i32 %.8, i32 %.9)\l  store i32 %.10, ptr %c, align 4\l  %.12 = load i32, ptr %c, align 4\l  %.13 = getelementptr inbounds [4 x i8], ptr @fmt_print_int_2, i32 0, i32 0\l  %.14 = call i32 (ptr, ...) @printf(ptr %.13, i32 %.12)\l  %.15 = load i32, ptr %i, align 4\l  %.16 = add i32 %.15, 1\l  store i32 %.16, ptr %i, align 4\l  %.18 = load i32, ptr %i, align 4\l  %.19 = icmp eq i32 %.18, 5\l  br i1 %.19, label %repeat.end, label %repeat.body\l|{<s0>T|<s1>F}}"];
+	Node0x5a8fc0b56760:s0 -> Node0x5a8fc0b58420[tooltip="repeat.body -> repeat.end\nProbability 3.12%" ];
+	Node0x5a8fc0b56760:s1 -> Node0x5a8fc0b56760[tooltip="repeat.body -> repeat.body\nProbability 96.88%" ];
+	Node0x5a8fc0b58420 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{repeat.end:\l|  store i32 0, ptr %retval, align 4\l  br label %exit\l}"];
+	Node0x5a8fc0b58420 -> Node0x5a8fc0b58650[tooltip="repeat.end -> exit\nProbability 100.00%" ];
+	Node0x5a8fc0b58650 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{exit:\l|  %ret.final = load i32, ptr %retval, align 4\l  ret i32 %ret.final\l}"];
+}

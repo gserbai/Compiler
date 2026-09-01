@@ -1,0 +1,22 @@
+digraph "CFG for 'insert_sort' function" {
+	label="CFG for 'insert_sort' function";
+
+	Node0x612546057c40 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{entry:\l|  store i32 2, ptr @i, align 4\l  br label %repeat.body\l}"];
+	Node0x612546057c40 -> Node0x612546058470[tooltip="entry -> repeat.body\nProbability 100.00%" ];
+	Node0x612546058470 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{repeat.body:\l|  %.4 = load i32, ptr @i, align 4\l  %.5 = getelementptr [11 x i32], ptr @vet, i32 0, i32 %.4\l  %.6 = load i32, ptr %.5, align 4\l  store i32 %.6, ptr @x, align 4\l  %.8 = load i32, ptr @i, align 4\l  %.9 = sub i32 %.8, 1\l  store i32 %.9, ptr @j, align 4\l  %.11 = getelementptr [11 x i32], ptr @vet, i32 0, i32 0\l  %.12 = load i32, ptr @x, align 4\l  store i32 %.12, ptr %.11, align 4\l  %.14 = load i32, ptr @x, align 4\l  %.15 = load i32, ptr @j, align 4\l  %.16 = getelementptr [11 x i32], ptr @vet, i32 0, i32 %.15\l  %.17 = load i32, ptr %.16, align 4\l  %.18 = icmp slt i32 %.14, %.17\l  br i1 %.18, label %if.then, label %if.end\l|{<s0>T|<s1>F}}"];
+	Node0x612546058470:s0 -> Node0x6125460593f0[tooltip="repeat.body -> if.then\nProbability 50.00%" ];
+	Node0x612546058470:s1 -> Node0x612546059460[tooltip="repeat.body -> if.end\nProbability 50.00%" ];
+	Node0x612546059580 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{repeat.end:\l|  br label %exit\l}"];
+	Node0x612546059580 -> Node0x612546059600[tooltip="repeat.end -> exit\nProbability 100.00%" ];
+	Node0x6125460593f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{if.then:\l|  br label %repeat.body.1\l}"];
+	Node0x6125460593f0 -> Node0x6125460596e0[tooltip="if.then -> repeat.body.1\nProbability 100.00%" ];
+	Node0x612546059460 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{if.end:\l|  %.38 = load i32, ptr @j, align 4\l  %.39 = add i32 %.38, 1\l  %.40 = getelementptr [11 x i32], ptr @vet, i32 0, i32 %.39\l  %.41 = load i32, ptr @x, align 4\l  store i32 %.41, ptr %.40, align 4\l  %.43 = load i32, ptr @i, align 4\l  %.44 = add i32 %.43, 1\l  store i32 %.44, ptr @i, align 4\l  %.46 = load i32, ptr @i, align 4\l  %.47 = load i32, ptr @tam, align 4\l  %.48 = icmp sgt i32 %.46, %.47\l  br i1 %.48, label %repeat.end, label %repeat.body\l|{<s0>T|<s1>F}}"];
+	Node0x612546059460:s0 -> Node0x612546059580[tooltip="if.end -> repeat.end\nProbability 3.12%" ];
+	Node0x612546059460:s1 -> Node0x612546058470[tooltip="if.end -> repeat.body\nProbability 96.88%" ];
+	Node0x6125460596e0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{repeat.body.1:\l|  %.21 = load i32, ptr @j, align 4\l  %.22 = add i32 %.21, 1\l  %.23 = getelementptr [11 x i32], ptr @vet, i32 0, i32 %.22\l  %.24 = load i32, ptr @j, align 4\l  %.25 = getelementptr [11 x i32], ptr @vet, i32 0, i32 %.24\l  %.26 = load i32, ptr %.25, align 4\l  store i32 %.26, ptr %.23, align 4\l  %.28 = load i32, ptr @j, align 4\l  %.29 = sub i32 %.28, 1\l  store i32 %.29, ptr @j, align 4\l  %.31 = load i32, ptr @x, align 4\l  %.32 = load i32, ptr @j, align 4\l  %.33 = getelementptr [11 x i32], ptr @vet, i32 0, i32 %.32\l  %.34 = load i32, ptr %.33, align 4\l  %.35 = icmp sge i32 %.31, %.34\l  br i1 %.35, label %repeat.end.1, label %repeat.body.1\l|{<s0>T|<s1>F}}"];
+	Node0x6125460596e0:s0 -> Node0x61254605b430[tooltip="repeat.body.1 -> repeat.end.1\nProbability 3.12%" ];
+	Node0x6125460596e0:s1 -> Node0x6125460596e0[tooltip="repeat.body.1 -> repeat.body.1\nProbability 96.88%" ];
+	Node0x61254605b430 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{repeat.end.1:\l|  br label %if.end\l}"];
+	Node0x61254605b430 -> Node0x612546059460[tooltip="repeat.end.1 -> if.end\nProbability 100.00%" ];
+	Node0x612546059600 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{exit:\l|  ret void\l}"];
+}

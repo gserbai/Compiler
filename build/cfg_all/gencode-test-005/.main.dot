@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x633e6f7e70e0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %retval = alloca i32, align 4\l  %ret = alloca i32, align 4\l  store i32 10, ptr @a, align 4\l  %.3 = load i32, ptr @a, align 4\l  %.4 = icmp sgt i32 %.3, 5\l  br i1 %.4, label %if.then, label %if.end\l|{<s0>T|<s1>F}}"];
+	Node0x633e6f7e70e0:s0 -> Node0x633e6f7e7f80[tooltip="entry -> if.then\nProbability 50.00%" ];
+	Node0x633e6f7e70e0:s1 -> Node0x633e6f7e7ff0[tooltip="entry -> if.end\nProbability 50.00%" ];
+	Node0x633e6f7e7f80 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{if.then:\l|  store i32 1, ptr %ret, align 4\l  br label %if.end\l}"];
+	Node0x633e6f7e7f80 -> Node0x633e6f7e7ff0[tooltip="if.then -> if.end\nProbability 100.00%" ];
+	Node0x633e6f7e7ff0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{if.end:\l|  %.8 = load i32, ptr %ret, align 4\l  store i32 %.8, ptr %retval, align 4\l  br label %exit\l}"];
+	Node0x633e6f7e7ff0 -> Node0x633e6f7e82f0[tooltip="if.end -> exit\nProbability 100.00%" ];
+	Node0x633e6f7e82f0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{exit:\l|  %ret.final = load i32, ptr %retval, align 4\l  ret i32 %ret.final\l}"];
+}

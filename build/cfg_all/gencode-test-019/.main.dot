@@ -1,0 +1,14 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5950de227170 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %retval = alloca i32, align 4\l  %b = alloca i32, align 4\l  store i32 10, ptr @a, align 4\l  %.3 = load i32, ptr @a, align 4\l  %.4 = icmp sge i32 %.3, 5\l  %.5 = load i32, ptr @a, align 4\l  %.6 = icmp sle i32 %.5, 20\l  %.7 = and i1 %.4, %.6\l  br i1 %.7, label %if.then, label %if.else\l|{<s0>T|<s1>F}}"];
+	Node0x5950de227170:s0 -> Node0x5950de228120[tooltip="entry -> if.then\nProbability 50.00%" ];
+	Node0x5950de227170:s1 -> Node0x5950de228190[tooltip="entry -> if.else\nProbability 50.00%" ];
+	Node0x5950de228120 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{if.then:\l|  store i32 50, ptr %b, align 4\l  br label %if.end\l}"];
+	Node0x5950de228120 -> Node0x5950de228380[tooltip="if.then -> if.end\nProbability 100.00%" ];
+	Node0x5950de228190 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{if.else:\l|  store i32 100, ptr %b, align 4\l  br label %if.end\l}"];
+	Node0x5950de228190 -> Node0x5950de228380[tooltip="if.else -> if.end\nProbability 100.00%" ];
+	Node0x5950de228380 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{if.end:\l|  %.13 = load i32, ptr %b, align 4\l  store i32 %.13, ptr %retval, align 4\l  br label %exit\l}"];
+	Node0x5950de228380 -> Node0x5950de228670[tooltip="if.end -> exit\nProbability 100.00%" ];
+	Node0x5950de228670 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{exit:\l|  %ret.final = load i32, ptr %retval, align 4\l  ret i32 %ret.final\l}"];
+}

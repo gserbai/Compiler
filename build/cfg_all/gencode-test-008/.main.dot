@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x621c14c5c280 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %retval = alloca i32, align 4\l  store i32 10, ptr @n, align 4\l  store i32 0, ptr @soma, align 4\l  br label %repeat.body\l}"];
+	Node0x621c14c5c280 -> Node0x621c14c5d030[tooltip="entry -> repeat.body\nProbability 100.00%" ];
+	Node0x621c14c5d030 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{repeat.body:\l|  %.5 = load i32, ptr @soma, align 4\l  %.6 = load i32, ptr @n, align 4\l  %.7 = add i32 %.5, %.6\l  store i32 %.7, ptr @soma, align 4\l  %.9 = load i32, ptr @n, align 4\l  %.10 = sub i32 %.9, 1\l  store i32 %.10, ptr @n, align 4\l  %.12 = load i32, ptr @n, align 4\l  %.13 = icmp eq i32 %.12, 0\l  br i1 %.13, label %repeat.end, label %repeat.body\l|{<s0>T|<s1>F}}"];
+	Node0x621c14c5d030:s0 -> Node0x621c14c5d4d0[tooltip="repeat.body -> repeat.end\nProbability 3.12%" ];
+	Node0x621c14c5d030:s1 -> Node0x621c14c5d030[tooltip="repeat.body -> repeat.body\nProbability 96.88%" ];
+	Node0x621c14c5d4d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{repeat.end:\l|  %.15 = load i32, ptr @soma, align 4\l  store i32 %.15, ptr %retval, align 4\l  br label %exit\l}"];
+	Node0x621c14c5d4d0 -> Node0x621c14c5d740[tooltip="repeat.end -> exit\nProbability 100.00%" ];
+	Node0x621c14c5d740 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{exit:\l|  %ret.final = load i32, ptr %retval, align 4\l  ret i32 %ret.final\l}"];
+}
