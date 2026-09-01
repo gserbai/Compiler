@@ -824,12 +824,13 @@ def main():
         # Árvore construída com sucesso
         if check_gentree:
             print(error_handler.newError(check_key, 'WAR-SYN-GEN-SYNTAX-TREE'))
-            UniqueDotExporter(root).to_picture(argv[idx_tpp] + ".unique.ast.png")
+            image_path = argv[idx_tpp] + ".unique.ast.png"
+            UniqueDotExporter(root).to_picture(image_path)
             DotExporter(root).to_dotfile(argv[idx_tpp] + ".ast.dot")
             UniqueDotExporter(root).to_dotfile(argv[idx_tpp] + ".unique.ast.dot")
-            with open(argv[idx_tpp] + "ascii_tree.txt", "w") as f:
+            with open(argv[idx_tpp] + ".ascii_tree.txt", "w") as f:
                 f.write(RenderTree(root, style=AsciiStyle()).by_attr())
-            print(error_handler.newError(check_key, 'WAR-SYN-OUTPUT-FILE', file=argv[idx_tpp] + ".ast.png"))
+            print(error_handler.newError(check_key, 'WAR-SYN-OUTPUT-FILE', file=image_path))
             print(error_handler.newError(check_key, 'WAR-SYN-ANA-SUCCESS'))
         else:
             # Sem -t: reporta sucesso sem gerar arquivos gráficos

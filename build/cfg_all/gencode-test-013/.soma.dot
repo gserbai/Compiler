@@ -1,7 +1,0 @@
-digraph "CFG for 'soma' function" {
-	label="CFG for 'soma' function";
-
-	Node0x5a8fc0b55230 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %retval = alloca i32, align 4\l  %a.1 = alloca i32, align 4\l  store i32 %a, ptr %a.1, align 4\l  %b.1 = alloca i32, align 4\l  store i32 %b, ptr %b.1, align 4\l  %.6 = load i32, ptr %a.1, align 4\l  %.7 = load i32, ptr %b.1, align 4\l  %.8 = add i32 %.6, %.7\l  store i32 %.8, ptr %retval, align 4\l  br label %exit\l}"];
-	Node0x5a8fc0b55230 -> Node0x5a8fc0b55be0[tooltip="entry -> exit\nProbability 100.00%" ];
-	Node0x5a8fc0b55be0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{exit:\l|  %ret.final = load i32, ptr %retval, align 4\l  ret i32 %ret.final\l}"];
-}

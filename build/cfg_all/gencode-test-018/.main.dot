@@ -1,7 +1,0 @@
-digraph "CFG for 'main' function" {
-	label="CFG for 'main' function";
-
-	Node0x6103ef906f50 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %retval = alloca i32, align 4\l  %.2 = getelementptr inbounds [3 x i8], ptr @fmt_scan_int_0, i32 0, i32 0\l  %.3 = call i32 (ptr, ...) @scanf(ptr %.2, ptr @n)\l  %.4 = load i32, ptr @n, align 4\l  %.5 = call i32 @fatorial(i32 %.4)\l  %.6 = getelementptr inbounds [4 x i8], ptr @fmt_print_int_1, i32 0, i32 0\l  %.7 = call i32 (ptr, ...) @printf(ptr %.6, i32 %.5)\l  store i32 0, ptr %retval, align 4\l  br label %exit\l}"];
-	Node0x6103ef906f50 -> Node0x6103ef907ec0[tooltip="entry -> exit\nProbability 100.00%" ];
-	Node0x6103ef907ec0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{exit:\l|  %ret.final = load i32, ptr %retval, align 4\l  ret i32 %ret.final\l}"];
-}

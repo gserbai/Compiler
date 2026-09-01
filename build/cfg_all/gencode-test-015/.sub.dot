@@ -1,7 +1,0 @@
-digraph "CFG for 'sub' function" {
-	label="CFG for 'sub' function";
-
-	Node0x56e830d2b180 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %retval = alloca i32, align 4\l  %z.1 = alloca i32, align 4\l  store i32 %z, ptr %z.1, align 4\l  %t.1 = alloca i32, align 4\l  store i32 %t, ptr %t.1, align 4\l  %.6 = load i32, ptr %z.1, align 4\l  %.7 = load i32, ptr %t.1, align 4\l  %.8 = sub i32 %.6, %.7\l  store i32 %.8, ptr %retval, align 4\l  br label %exit\l}"];
-	Node0x56e830d2b180 -> Node0x56e830d2b6f0[tooltip="entry -> exit\nProbability 100.00%" ];
-	Node0x56e830d2b6f0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{exit:\l|  %ret.final = load i32, ptr %retval, align 4\l  ret i32 %ret.final\l}"];
-}

@@ -1,7 +1,0 @@
-digraph "CFG for 'main' function" {
-	label="CFG for 'main' function";
-
-	Node0x58ea35485cd0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %retval = alloca i32, align 4\l  %a = alloca i32, align 4\l  %b = alloca i32, align 4\l  %c = alloca i32, align 4\l  %.2 = getelementptr inbounds [3 x i8], ptr @fmt_scan_int_0, i32 0, i32 0\l  %.3 = call i32 (ptr, ...) @scanf(ptr %.2, ptr %a)\l  %.4 = getelementptr inbounds [3 x i8], ptr @fmt_scan_int_1, i32 0, i32 0\l  %.5 = call i32 (ptr, ...) @scanf(ptr %.4, ptr %b)\l  %.6 = load i32, ptr %a, align 4\l  %.7 = load i32, ptr %b, align 4\l  %.8 = call i32 @soma(i32 %.6, i32 %.7)\l  store i32 %.8, ptr %c, align 4\l  %.10 = load i32, ptr %c, align 4\l  %.11 = getelementptr inbounds [4 x i8], ptr @fmt_print_int_2, i32 0, i32 0\l  %.12 = call i32 (ptr, ...) @printf(ptr %.11, i32 %.10)\l  store i32 0, ptr %retval, align 4\l  br label %exit\l}"];
-	Node0x58ea35485cd0 -> Node0x58ea354878f0[tooltip="entry -> exit\nProbability 100.00%" ];
-	Node0x58ea354878f0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{exit:\l|  %ret.final = load i32, ptr %retval, align 4\l  ret i32 %ret.final\l}"];
-}

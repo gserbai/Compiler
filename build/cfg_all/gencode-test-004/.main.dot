@@ -1,7 +1,0 @@
-digraph "CFG for 'main' function" {
-	label="CFG for 'main' function";
-
-	Node0x5d7b153e5180 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %retval = alloca i32, align 4\l  %c = alloca i32, align 4\l  store i32 10, ptr @a, align 4\l  store i32 20, ptr @b, align 4\l  %.4 = load i32, ptr @a, align 4\l  %.5 = load i32, ptr @b, align 4\l  %.6 = add i32 %.4, %.5\l  store i32 %.6, ptr %c, align 4\l  %.8 = load i32, ptr %c, align 4\l  store i32 %.8, ptr %retval, align 4\l  br label %exit\l}"];
-	Node0x5d7b153e5180 -> Node0x5d7b153e6340[tooltip="entry -> exit\nProbability 100.00%" ];
-	Node0x5d7b153e6340 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{exit:\l|  %ret.final = load i32, ptr %retval, align 4\l  ret i32 %ret.final\l}"];
-}

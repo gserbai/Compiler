@@ -21,6 +21,9 @@ clang -O2 -Wno-override-module \
 
 # 4. Execução
 printf '5\n' | ./build/demo/fibonacci
+
+# 5. CFGs em DOT e PNG para cada função
+python gerar_cfg.py tests/gencode-test-023.tpp
 ```
 
 Para gerar todos os exemplos válidos:
@@ -32,7 +35,14 @@ bash gerar_executaveis_tpp.sh
 Para validar a geração de código:
 
 ```bash
-python -m pytest -q tppgencode_test.py
+python -m pytest -q tppgencode_test.py cfg_test.py
 ```
 
-O Clang usa o target do próprio computador quando `--target` não é informado. Consulte no README os comandos que geram assembly (`-S`), objeto com código de máquina (`-c`) e saídas para outras arquiteturas.
+Para gerar as árvores completa e podada:
+
+```bash
+python tppparser.py -t tests/gencode-test-023.tpp
+python tppsema.py -t tests/gencode-test-023.tpp
+```
+
+O Clang usa o target do próprio computador quando `--target` não é informado. Consulte no README os comandos que geram assembly (`-S`), objeto com código de máquina (`-c`), CFGs em outros formatos e saídas para outras arquiteturas.

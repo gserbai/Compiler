@@ -1,5 +1,44 @@
-
-venv/
+# Ambientes virtuais
 .venv/
+venv/
+env/
+
+# Python e ferramentas de teste
 __pycache__/
 *.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Artefatos gerados pelo compilador
+/build/
+*.tpp.ll
+*.log
+/a.out
+*.o
+*.obj
+*.exe
+*.ast.dot
+*.ast.png
+*ascii_tree.txt
+
+# Tabelas geradas pelo PLY
+/lextab.py
+/parsetab.py
+/parser.out
+/tpp_parser_tab.py
+
+# Empacotamento da extensão do VS Code
+node_modules/
+*.vsix
+
+# Arquivos locais de ambiente, IDE e sistema operacional
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

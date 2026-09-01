@@ -2,12 +2,15 @@
 
 [![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![LLVM IR](https://img.shields.io/badge/LLVM-IR-262D3A?logo=llvm)](https://llvm.org/)
-[![Testes de geração de código](../../actions/workflows/codegen-tests.yml/badge.svg)](../../actions/workflows/codegen-tests.yml)
 [![Licença](https://img.shields.io/badge/licen%C3%A7a-Apache--2.0-blue.svg)](LICENSE)
 
-Compilador acadêmico para a linguagem **TPP (Tupi)**, implementado em Python. O projeto recebe um programa `.tpp`, executa as análises léxica, sintática e semântica, gera **LLVM IR** com llvmlite e entrega o resultado ao **Clang/LLVM** para produzir assembly, código de máquina ou um executável nativo.
+Compilador acadêmico para a linguagem **TPP**, implementado em Python. O projeto recebe um programa `.tpp`, executa as análises léxica, sintática e semântica, gera **LLVM IR** com llvmlite e entrega o resultado ao **Clang/LLVM** para produzir assembly, código de máquina ou um executável nativo.
 
 O objetivo é demonstrar, de ponta a ponta, como um front-end de compilador se conecta a um back-end real e multiplataforma.
+
+## Contexto acadêmico
+
+Este projeto foi desenvolvido na disciplina de **Compiladores** da **Universidade Tecnológica Federal do Paraná (UTFPR) – Campus Campo Mourão**. A gramática da linguagem utilizada no projeto foi fornecida pelo **Prof. Dr. Rogério Aparecido Gonçalves**, responsável por ministrar a disciplina.
 
 ## Pipeline de compilação
 
@@ -18,6 +21,7 @@ flowchart LR
     C --> D["Análise semântica<br/>tppsema.py"]
     D --> E["Geração de código<br/>tppgencode.py + llvmlite"]
     E --> F["LLVM IR<br/>.ll"]
+    F --> J["CFG por função<br/>DOT + Graphviz"]
     F --> G["Clang -S<br/>assembly .s"]
     F --> H["Clang -c<br/>objeto .o"]
     F --> I["Clang + linker<br/>executável"]
@@ -37,13 +41,14 @@ O front-end deste repositório termina no arquivo `.ll`. A seleção de arquitet
 - operações aritméticas, relacionais e lógicas;
 - entrada e saída com `leia` e `escreva`;
 - geração de LLVM IR com llvmlite;
+- geração de CFG por função em DOT, PNG, SVG ou PDF;
 - geração de código nativo pelo Clang para os targets disponíveis na instalação.
 
 ## Pré-requisitos
 
 - Python 3.12 ou superior;
 - Clang/LLVM para gerar assembly, objetos e executáveis;
-- Graphviz somente para exportar imagens das árvores com a opção `-t`.
+- Graphviz para exportar imagens das árvores e renderizar CFGs em PNG, SVG ou PDF.
 
 No Ubuntu/Debian:
 
@@ -56,9 +61,12 @@ No Windows, o caminho mais simples é usar WSL. Os comandos abaixo assumem um te
 
 ## Instalação
 
-Na raiz do projeto:
+Clone o repositório e, na raiz do projeto, crie um ambiente virtual:
 
 ```bash
+git clone https://github.com/gserbai/Compiler.git
+cd Compiler
+
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
@@ -139,11 +147,81 @@ python tppsema.py tests/gencode-test-023.tpp
 python tppgencode.py tests/gencode-test-023.tpp
 ```
 
-Para exportar árvores em `.dot` e `.png`, instale o Graphviz e acrescente `-t` ao parser ou ao analisador semântico:
+### Árvores sintática e semântica
+
+Para exportar as árvores, instale o Graphviz e acrescente `-t` ao parser ou ao analisador semântico:
 
 ```bash
+# AST completa
 python tppparser.py -t tests/gencode-test-023.tpp
+
+# AST podada após a análise semântica
 python tppsema.py -t tests/gencode-test-023.tpp
+```
+
+O parser gera a árvore completa em `.dot`, `.png` e texto ASCII:
+
+```text
+tests/gencode-test-023.tpp.ast.dot
+tests/gencode-test-023.tpp.unique.ast.dot
+tests/gencode-test-023.tpp.unique.ast.png
+tests/gencode-test-023.tpp.ascii_tree.txt
+```
+
+O analisador semântico gera a árvore podada:
+
+```text
+tests/gencode-test-023.tpp.pruned.ast.dot
+tests/gencode-test-023.tpp.pruned.ast.png
+```
+
+## Gerar gráficos CFG
+
+O script `gerar_cfg.py` aceita diretamente um fonte `.tpp` ou um LLVM IR `.ll`. Para compilar o exemplo de Fibonacci e gerar um CFG em DOT e PNG para cada função:
+
+```bash
+python gerar_cfg.py tests/gencode-test-023.tpp
+```
+
+As saídas são organizadas por programa:
+
+```text
+tests/gencode-test-023.tpp.ll
+build/cfg/gencode-test-023/fibonacciRec.dot
+build/cfg/gencode-test-023/fibonacciRec.png
+build/cfg/gencode-test-023/fibonacciIter.dot
+build/cfg/gencode-test-023/fibonacciIter.png
+build/cfg/gencode-test-023/main.dot
+build/cfg/gencode-test-023/main.png
+```
+
+O arquivo DOT sempre é gerado. Para trabalhar sem Graphviz ou escolher outro formato:
+
+```bash
+# Somente DOT, sem dependência do executável dot
+python gerar_cfg.py tests/gencode-test-023.tpp --format dot
+
+# SVG ou PDF
+python gerar_cfg.py tests/gencode-test-023.tpp --format svg
+python gerar_cfg.py tests/gencode-test-023.tpp --format pdf
+
+# CFG simplificado, sem listar as instruções LLVM dentro dos blocos
+python gerar_cfg.py tests/gencode-test-023.tpp --hide-instructions
+```
+
+Também é possível gerar os gráficos a partir de um IR existente:
+
+```bash
+python gerar_cfg.py tests/gencode-test-023.tpp.ll --format png
+```
+
+Para gerar os CFGs de todos os LLVM IR válidos criados pelo script de executáveis:
+
+```bash
+bash gerar_executaveis_tpp.sh
+for ir in tests/*.tpp.ll; do
+    python gerar_cfg.py "$ir" --format png
+done
 ```
 
 ## LLVM IR, assembly e código de máquina
@@ -213,18 +291,20 @@ bash gerar_executaveis_tpp.sh
 
 O script usa o target padrão do computador. Alguns arquivos de `tests/` representam casos inválidos de entrada e, por isso, não produzem LLVM IR.
 
+Os arquivos `.tpp.ll`, os executáveis, os CFGs, as imagens de árvores e os logs são gerados localmente e não fazem parte do repositório. Eles podem ser recriados a qualquer momento com os comandos acima.
+
 ## Testes
 
-A suíte de geração de código disponível possui 35 casos:
+As suítes reproduzíveis possuem 35 casos de geração de código e 7 casos de CFG:
 
 ```bash
-python -m pytest -q tppgencode_test.py
+python -m pytest -q tppgencode_test.py cfg_test.py
 ```
 
 Resultado esperado:
 
 ```text
-35 passed
+42 passed
 ```
 
 As suítes históricas de lexer, parser e semântica permanecem no repositório, mas seus arquivos de saída esperada não fazem parte deste snapshot. Por isso, use o comando específico acima para reproduzir a validação disponível.
@@ -237,9 +317,11 @@ As suítes históricas de lexer, parser e semântica permanecem no repositório,
 | `tppparser.py` | gramática, parser LALR e AST |
 | `tppsema.py` | análise semântica e árvore podada |
 | `tppgencode.py` | geração de LLVM IR |
+| `gerar_cfg.py` | geração de CFGs em DOT, PNG, SVG ou PDF |
 | `mytree.py` | estruturas auxiliares da árvore |
 | `myerror.py` | carregamento e formatação de diagnósticos |
 | `ErrorMessages.properties` | catálogo de mensagens do compilador |
+| `requirements.txt` | dependências Python necessárias para executar e testar |
 | `tests/` | programas TPP e fixtures dos testes |
 | `gerar_executaveis_tpp.sh` | automação IR → executáveis nativos |
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Script para gerar LLVM IR (.ll) e compilar executáveis x86 dos testes TPP.
+# Script para gerar LLVM IR (.ll) e compilar executáveis nativos dos testes TPP.
 # Uso:
 #   ./gerar_executaveis_tpp.sh
-# Deve ser executado na raiz do projeto geracao-de-codigo-gserbai.
+# Deve ser executado na raiz do projeto.
 
 if [[ ! -f "tppgencode.py" ]]; then
     echo "Erro: execute este script na raiz do projeto, onde está o arquivo tppgencode.py."
@@ -17,30 +17,46 @@ if [[ ! -d "tests" ]]; then
 fi
 
 if ! command -v clang >/dev/null 2>&1; then
-    echo "Erro: clang não encontrado. Instale com: sudo apt install clang llvm lld"
+    echo "Erro: clang não encontrado. Instale com: sudo apt install clang llvm"
     exit 1
 fi
 
-# Ativa o venv automaticamente se existir e ainda não estiver ativo.
-if [[ -d "venv" && -z "${VIRTUAL_ENV:-}" ]]; then
-    source venv/bin/activate
+# Usa o ambiente virtual recomendado, mesmo que ele não esteja ativado.
+if [[ -n "${VIRTUAL_ENV:-}" ]]; then
+    python_cmd="python"
+elif [[ -x ".venv/bin/python" ]]; then
+    python_cmd=".venv/bin/python"
+elif [[ -x "venv/bin/python" ]]; then
+    python_cmd="venv/bin/python"
+elif command -v python3 >/dev/null 2>&1; then
+    python_cmd="python3"
+else
+    echo "Erro: Python 3 não encontrado."
+    exit 1
+fi
+
+if ! "$python_cmd" -c "import anytree, llvmlite, ply" >/dev/null 2>&1; then
+    echo "Erro: dependências Python ausentes. Execute:"
+    echo "  python3 -m venv .venv"
+    echo "  .venv/bin/python -m pip install -r requirements.txt"
+    exit 1
 fi
 
 mkdir -p build/executaveis
 
 # Remove LLVM IR antigo para evitar confusão.
-rm -f tests/*.ll
+rm -f tests/*.tpp.ll
 
 echo "==> Gerando arquivos LLVM IR (.ll)..."
 for src in tests/*.tpp; do
     echo "Gerando IR: $src"
     # Alguns testes podem ser casos inválidos de sintaxe/semântica e não gerar .ll.
     # Por isso o script continua mesmo se algum caso não produzir IR.
-    python tppgencode.py "$src" >/dev/null || true
+    "$python_cmd" tppgencode.py "$src" >/dev/null || true
 done
 
 shopt -s nullglob
-ll_files=(tests/*.ll)
+ll_files=(tests/*.tpp.ll)
 
 if (( ${#ll_files[@]} == 0 )); then
     echo "Nenhum arquivo .ll foi gerado. Verifique o tppgencode.py."
@@ -49,7 +65,7 @@ fi
 
 echo
 
-echo "==> Compilando .ll para executáveis x86..."
+echo "==> Compilando .ll para executáveis nativos..."
 for ll in "${ll_files[@]}"; do
     base=$(basename "$ll")
     exe_name="${base%.tpp.ll}"
@@ -68,4 +84,4 @@ echo
 
 echo "Exemplo de execução:"
 echo "  ./build/executaveis/gencode-test-002"
-echo "  echo $?"
+echo "  echo \$?"
