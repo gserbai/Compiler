@@ -17,8 +17,8 @@
   "Se-Então": {
     "prefix": "se",
     "body": [
-      "se ${1:condicao} então",
-      "\t${2:// ação}",
+      "se ${1:1} então",
+      "\t${2:escreva(0)}",
       "fim"
     ],
     "description": "Estrutura condicional se-então"
@@ -26,10 +26,10 @@
   "Se-Então-Senão": {
     "prefix": "se-senao",
     "body": [
-      "se ${1:condicao} então",
-      "\t${2:// ação verdadeira}",
+      "se ${1:1} então",
+      "\t${2:escreva(1)}",
       "senão",
-      "\t${3:// ação falsa}",
+      "\t${3:escreva(0)}",
       "fim"
     ],
     "description": "Estrutura condicional se-então-senão"
@@ -38,16 +38,16 @@
     "prefix": "repita",
     "body": [
       "repita",
-      "\t${1:// ação}",
-      "até ${2:condicao}"
+      "\t${1:escreva(0)}",
+      "até ${2:1}"
     ],
     "description": "Estrutura de repetição repita-até"
   },
   "Função sem retorno": {
     "prefix": "funcao",
     "body": [
-      "${1:nome} (${2:parametros})",
-      "\t${3:// corpo}",
+      "${1:nome}(${2})",
+      "\t${3:escreva(0)}",
       "fim"
     ],
     "description": "Declara uma função sem tipo de retorno"
@@ -55,9 +55,9 @@
   "Função com retorno inteiro": {
     "prefix": "funcao-int",
     "body": [
-      "inteiro ${1:nome} (${2:parametros})",
-      "\t${3:// corpo}",
-      "\tretorna(${4:valor})",
+      "inteiro ${1:nome}(${2})",
+      "\t${3:escreva(0)}",
+      "\tretorna(${4:0})",
       "fim"
     ],
     "description": "Declara uma função com retorno inteiro"
@@ -65,9 +65,9 @@
   "Função com retorno flutuante": {
     "prefix": "funcao-float",
     "body": [
-      "flutuante ${1:nome} (${2:parametros})",
-      "\t${3:// corpo}",
-      "\tretorna(${4:valor})",
+      "flutuante ${1:nome}(${2})",
+      "\t${3:escreva(0)}",
+      "\tretorna(${4:0.0})",
       "fim"
     ],
     "description": "Declara uma função com retorno flutuante"

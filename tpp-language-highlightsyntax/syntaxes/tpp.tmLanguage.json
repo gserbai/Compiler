@@ -4,11 +4,10 @@
   "fileTypes": ["tpp"],
   "patterns": [
     { "include": "#comments" },
-    { "include": "#strings" },
     { "include": "#keywords" },
     { "include": "#types" },
-    { "include": "#operators" },
     { "include": "#numbers" },
+    { "include": "#operators" },
     { "include": "#functions" },
     { "include": "#identifiers" }
   ],
@@ -16,13 +15,9 @@
     "comments": {
       "patterns": [
         {
-          "name": "comment.line.double-slash.tpp",
-          "match": "//.*$"
-        },
-        {
           "name": "comment.block.tpp",
-          "begin": "/\\*",
-          "end": "\\*/",
+          "begin": "\\{",
+          "end": "\\}",
           "beginCaptures": {
             "0": { "name": "punctuation.definition.comment.begin.tpp" }
           },
@@ -32,26 +27,15 @@
         }
       ]
     },
-    "strings": {
-      "name": "string.quoted.double.tpp",
-      "begin": "\"",
-      "end": "\"",
-      "patterns": [
-        {
-          "name": "constant.character.escape.tpp",
-          "match": "\\\\."
-        }
-      ]
-    },
     "keywords": {
       "patterns": [
         {
           "name": "keyword.control.conditional.tpp",
-          "match": "\\b(se|então|entao|senão|senao)\\b"
+          "match": "\\b(se|então|senão)\\b"
         },
         {
           "name": "keyword.control.loop.tpp",
-          "match": "\\b(repita|até|ate)\\b"
+          "match": "\\b(repita|até)\\b"
         },
         {
           "name": "keyword.control.return.tpp",
@@ -115,15 +99,15 @@
       "patterns": [
         {
           "name": "constant.numeric.scientific.tpp",
-          "match": "\\b\\d+\\.?\\d*e[+\\-]?\\d+\\b"
+          "match": "[+\\-]?[1-9]\\.[0-9]+[eE][+\\-]?[0-9]+"
         },
         {
           "name": "constant.numeric.float.tpp",
-          "match": "\\b\\d+\\.\\d*\\b"
+          "match": "(?:[0-9]+[eE][+\\-]?[0-9]+|(?:\\.[0-9]+|[0-9]+\\.[0-9]*)(?:[eE][+\\-]?[0-9]+)?)"
         },
         {
           "name": "constant.numeric.integer.tpp",
-          "match": "\\b\\d+\\b"
+          "match": "[0-9]+"
         }
       ]
     },
@@ -131,7 +115,7 @@
       "patterns": [
         {
           "name": "entity.name.function.tpp",
-          "match": "\\b([a-zA-Z_áéíóúãõâêôàèìòùÁÉÍÓÚÃÕÂÊÔÀÈÌÒÙ][a-zA-Z0-9_áéíóúãõâêôàèìòùÁÉÍÓÚÃÕÂÊÔÀÈÌÒÙ]*)\\s*(?=\\()"
+          "match": "\\b([a-zA-ZáÁãÃàÀéÉíÍóÓõÕ][a-zA-Z0-9_áÁãÃàÀéÉíÍóÓõÕ]*)\\s*(?=\\()"
         }
       ]
     },
@@ -139,7 +123,7 @@
       "patterns": [
         {
           "name": "variable.other.tpp",
-          "match": "\\b[a-zA-Z_áéíóúãõâêôàèìòùÁÉÍÓÚÃÕÂÊÔÀÈÌÒÙ][a-zA-Z0-9_áéíóúãõâêôàèìòùÁÉÍÓÚÃÕÂÊÔÀÈÌÒÙ]*\\b"
+          "match": "\\b[a-zA-ZáÁãÃàÀéÉíÍóÓõÕ][a-zA-Z0-9_áÁãÃàÀéÉíÍóÓõÕ]*\\b"
         }
       ]
     }

@@ -10,10 +10,10 @@
   "categories": [
     "Programming Languages"
   ],
-  "icon": "icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Guilherme-Saides-Serbai/Compiler/tree/main/tpp-language"
+    "url": "https://github.com/gserbai/Compiler.git",
+    "directory": "tpp-language-highlightsyntax"
   },
   "contributes": {
     "languages": [

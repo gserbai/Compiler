@@ -12,6 +12,8 @@ O objetivo é demonstrar, de ponta a ponta, como um front-end de compilador se c
 
 Este projeto foi desenvolvido na disciplina de **Compiladores** da **Universidade Tecnológica Federal do Paraná (UTFPR) – Campus Campo Mourão**. A gramática da linguagem utilizada no projeto foi fornecida pelo **Prof. Dr. Rogério Aparecido Gonçalves**, responsável por ministrar a disciplina.
 
+Para aprender a escrever programas `.tpp`, consulte a **[gramática e o guia da linguagem TPP](GRAMATICA_TPP.md)**.
+
 ## Pipeline de compilação
 
 ```mermaid
@@ -321,6 +323,7 @@ As suítes históricas de lexer, parser e semântica permanecem no repositório,
 | `mytree.py` | estruturas auxiliares da árvore |
 | `myerror.py` | carregamento e formatação de diagnósticos |
 | `ErrorMessages.properties` | catálogo de mensagens do compilador |
+| `GRAMATICA_TPP.md` | gramática formal, sintaxe, exemplos e limitações da linguagem |
 | `requirements.txt` | dependências Python necessárias para executar e testar |
 | `tests/` | programas TPP e fixtures dos testes |
 | `gerar_executaveis_tpp.sh` | automação IR → executáveis nativos |
